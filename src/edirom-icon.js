@@ -170,7 +170,7 @@ class EdiromIcon extends HTMLElement {
             wrapper.appendChild(slot);
         } else if (name) {
             // Use the ligature text approach for Material Icons
-            wrapper.textContent = name;
+            wrapper.textContent = EdiromIcon._mapIconName(name);
         } else {
             // empty state: render nothing
         }
@@ -225,7 +225,7 @@ class EdiromIcon extends HTMLElement {
             'list_view': 'data_table',
             'open_all': 'select_window',
             'close_all': 'select_window_off'
-            
+
             // ... add more mappings as needed
         }
 
