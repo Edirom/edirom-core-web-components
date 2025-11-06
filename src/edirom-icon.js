@@ -7,6 +7,9 @@
  *     <edirom-icon name="home"></edirom-icon>
  *     <edirom-icon name="home" size="36" color="#f33" spin rotate="45"></edirom-icon>
  *     <edirom-icon role="button" tabindex="0" name="menu"></edirom-icon>
+ * - Mapping:
+ *   There is a basic mapping of some edirom icon names to Material icon names.
+ *   Extend the mapping in the _mapIconName method as needed.
  * - You can also place custom SVG/HTML inside the element (slot) to override the font icon.
  */
 
@@ -202,6 +205,35 @@ class EdiromIcon extends HTMLElement {
         link.href = href;
         link.setAttribute('data-edirom-material-icons', '1');
         document.head.appendChild(link);
+    }
+
+    // mapping of icon names to Material names
+    static _mapIconName(name) {
+
+        const map = {
+            'page_view': "content_copy",
+            'measure_view': 'align_items_stretch',
+            'previous': 'arrow_left',
+            'next': 'arrow_right',
+            'voice_filter': 'checklist',
+            'sort_grid': 'dataset',
+            'sort_vertical': 'splitscreen_portrait',
+            'sort_horizontal': 'splitscreen_landscape',
+            'toggle_measures': 'pin',
+            'toggle_annotations': 'comment',
+            'concordance_navigator': 'sync_alt',
+            'list_view': 'data_table',
+            'open_all': 'select_window',
+            'close_all': 'select_window_off'
+            
+            // ... add more mappings as needed
+        }
+
+        if (name in map) {
+            return map[name];
+        } else {
+            return name;
+        }
     }
 }
 
