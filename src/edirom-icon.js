@@ -211,20 +211,20 @@ class EdiromIcon extends HTMLElement {
     static _mapIconName(name) {
 
         const map = {
-            'page_view': "content_copy",
-            'measure_view': 'align_items_stretch',
-            'previous': 'arrow_left',
-            'next': 'arrow_right',
-            'voice_filter': 'checklist',
-            'sort_grid': 'dataset',
-            'sort_vertical': 'splitscreen_portrait',
-            'sort_horizontal': 'splitscreen_landscape',
-            'toggle_measures': 'pin',
-            'toggle_annotations': 'comment',
-            'concordance_navigator': 'sync_alt',
-            'list_view': 'data_table',
-            'open_all': 'select_window',
-            'close_all': 'select_window_off'
+            'eo_page_view': "content_copy",
+            'eo_measure_view': 'align_items_stretch',
+            'eo_previous': 'arrow_left',
+            'eo_next': 'arrow_right',
+            'eo_voice_filter': 'checklist',
+            'eo_sort_grid': 'dataset',
+            'eo_sort_vertical': 'splitscreen_portrait',
+            'eo_sort_horizontal': 'splitscreen_landscape',
+            'eo_toggle_measures': 'pin',
+            'eo_toggle_annotations': 'comment',
+            'eo_concordance_navigator': 'sync_alt',
+            'eo_list_view': 'data_table',
+            'eo_open_all': 'select_window',
+            'eo_close_all': 'select_window_off'
 
             // ... add more mappings as needed
         }
