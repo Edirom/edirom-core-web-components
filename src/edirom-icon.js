@@ -224,7 +224,11 @@ class EdiromIcon extends HTMLElement {
             'eo_concordance_navigator': 'sync_alt',
             'eo_list_view': 'data_table',
             'eo_open_all': 'select_window',
-            'eo_close_all': 'select_window_off'
+            'eo_close_all': 'select_window_off',
+            'eo_about': 'info',
+            'eo_help': 'help',
+            'eo_search': 'search',
+            'eo_language_switch': 'language'
 
             // ... add more mappings as needed
         }
