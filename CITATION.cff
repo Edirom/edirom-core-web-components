@@ -1,0 +1,23 @@
+cff-version: 1.2.0
+title: Edirom Online Core Web Components
+message: >-
+  If you use this software, please cite it using the
+  metadata from this file.
+type: software
+authors:
+  - given-names: Daniel
+    family-names: Jettka
+    orcid: https://orcid.org/0000-0002-2375-2227
+identifiers:
+  - type: doi
+    value: 10.5281/zenodo.17241033
+    description: Edirom Online Core Web Components Release
+repository-code: 'https://github.com/Edirom/edirom-core-web-components'
+abstract: >-
+  This repository contains core web components for the Edirom Online. 
+  In general these are smaller components for parts of the Edirom like 
+  icons, lists, menus etc. More complex web components are organized 
+  in individual repositories.
+license: GPL-3.0
+version: v0.1.0
+date-released: '2025-12-01'
