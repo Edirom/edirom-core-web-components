@@ -10,7 +10,7 @@ authors:
     orcid: https://orcid.org/0000-0002-2375-2227
 identifiers:
   - type: doi
-    value: 10.5281/zenodo.17241033
+    value: 10.5281/zenodo.17813169
     description: Edirom Online Core Web Components Release
 repository-code: 'https://github.com/Edirom/edirom-core-web-components'
 abstract: >-
