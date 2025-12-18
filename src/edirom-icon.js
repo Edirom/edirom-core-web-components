@@ -213,7 +213,7 @@ class EdiromIcon extends HTMLElement {
         const map = {
             'eo_page_view': "content_copy",
             'eo_measure_view': 'align_items_stretch',
-            'eo_reset_view': 'reset_focus',
+            'eo_reset_view': 'recenter',
             'eo_previous': 'arrow_left',
             'eo_next': 'arrow_right',
             'eo_voice_filter': 'checklist',
