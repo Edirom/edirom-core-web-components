@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Zoom Image Component Demo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <style>
+    body {
+      font-family: system-ui, sans-serif;
+      padding: 2rem;
+      background: #f4f4f4;
+    }
+
+    edirom-image {
+      margin-right: 2rem;
+      border: 1px solid #ccc;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>&lt;zoom-image&gt; Demo</h1>
+
+  <p>Mouse wheel to zoom, drag to pan, double-click to reset.</p>
+
+  <edirom-image
+    src="default.jpg"
+    max-scale="6">
+  </edirom-image>
+
+  <edirom-image
+    src="default.jpg"
+    style="width: 300px; height: 300px;">
+  </edirom-image>
+
+  <script src="edirom-image.js"></script>
+</body>
+</html>
