@@ -3,7 +3,7 @@
 This repository contains core web components for the Edirom Online. In general these are smaller components for parts of the Edirom like icons, lists, menus etc.
 More complex web components are organized in individual repositories. You can get an overview of other web components in the [edirom-web-components](https://github.com/Edirom/edirom-web-components) repository which integrates other components as submodules and provides basic demonstrators for them.
 
-## <edirom-dom>
+## `<edirom-dom>`
 
 A lightweight Web Component that wraps its light DOM content inside a Shadow DOM using a <slot>.
 
