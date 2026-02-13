@@ -30,6 +30,7 @@ The content remains in the light DOM but is rendered inside the component's Shad
 ### Attributes
 
 | Attribute | Type | Default | Description | 
+| -- | -- | -- | -- |
 | mode | "open", "closed" | "open" | Defines the Shadow DOM mode |
 | delegates-focus | boolean | false | Enables focus delegation |
 | slot-assignment | "named", "manual" | browser default | Controls slot assignment behavior |
