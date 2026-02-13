@@ -5,13 +5,13 @@ More complex web components are organized in individual repositories. You can ge
 
 ## `<edirom-dom>`
 
-A lightweight Web Component that wraps its light DOM content inside a Shadow DOM using a <slot>.
+A lightweight Web Component that wraps its light DOM content inside a Shadow DOM using a `<slot>`.
 
 It allows configuring Shadow DOM options declaratively via HTML attributes.
 
 ### Features
 
-Uses Shadow DOM with <slot> (does not move children)
+Uses Shadow DOM with `<slot>` (does not move children)
 Configurable Shadow DOM options via attributes
 Reacts to attribute changes
 Zero dependencies
@@ -25,7 +25,7 @@ Native Web Component (no framework)
 </edirom-dom>
 ```
 
-The content remains in the light DOM but is rendered inside the component's Shadow DOM via a default <slot>.
+The content remains in the light DOM but is rendered inside the component's Shadow DOM via a default `<slot>`.
 
 ### Attributes
 
