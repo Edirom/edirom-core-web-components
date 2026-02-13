@@ -150,7 +150,7 @@ edirom-icon {
 ```
 
 
-## 🔁 Icon Name Mapping
+## Icon Name Mapping
 
 The component includes a built-in mapping layer:
 
