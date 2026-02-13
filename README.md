@@ -1,10 +1,17 @@
+<div align="left">
+ 
+[![DOI](https://zenodo.org/badge/1090859160.svg)](https://doi.org/10.5281/zenodo.17813169)
+[![GitHub release](https://img.shields.io/github/v/release/Edirom/edirom-core-web-components.svg)](https://github.com/Edirom/edirom-core-web-components/releases) 
+
+</div>
+
+
+
 # Core web components for Edirom Online
 
 This repository contains core web components for the Edirom Online. In general these are smaller components for parts of the Edirom like icons, lists, menus etc.
 More complex web components are organized in individual repositories. You can get an overview of other web components in the [edirom-web-components](https://github.com/Edirom/edirom-web-components) repository which integrates other components as submodules and provides basic demonstrators for them.
 
-<<<<<<< Updated upstream
-=======
 
 ## `<edirom-icon>`
 
@@ -41,7 +48,6 @@ It provides:
 <edirom-icon name="home"></edirom-icon>
 ```
 
----
 
 ### Size and Color
 
@@ -49,7 +55,6 @@ It provides:
 <edirom-icon name="home" size="36" color="#f33"></edirom-icon>
 ```
 
----
 
 ### Spin and Rotate
 
@@ -59,7 +64,6 @@ It provides:
 <edirom-icon name="arrow_right" rotate="45"></edirom-icon>
 ```
 
----
 
 ### Button Behavior
 
@@ -113,7 +117,6 @@ If the element contains children, the component renders a `<slot>` instead of a 
 | `button`      | boolean                       | Enables button styling + keyboard |
 | `pressed`     | boolean                       | Applies pressed styling |
 
----
 
 ## Size Attribute Formats
 
@@ -127,7 +130,6 @@ The `size` attribute supports:
 | `"150%"`| `150%` |
 | `"2x"`  | `2em`  |
 
----
 
 ## Styling
 
@@ -245,6 +247,3 @@ If mode="closed" is used:
 
 element.shadowRoot // → null
 
-
-
->>>>>>> Stashed changes
