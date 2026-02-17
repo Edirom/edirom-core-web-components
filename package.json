@@ -1,0 +1,24 @@
+{
+  "name": "edirom-core-web-components",
+  "version": "0.2.0",
+  "description": "This package contains small web components for parts of the Edirom like icons, lists, menus etc. More complex web components are organized in individual repositories.",
+  "homepage": "https://github.com/Edirom/edirom-core-web-components#readme",
+  "bugs": {
+    "url": "https://github.com/Edirom/edirom-core-web-components/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Edirom/edirom-core-web-components.git"
+  },
+  "license": "GPL-3.0",
+  "author": "Daniel Jettka <daniel.jettka@uni-paderborn.de>",
+  "type": "commonjs",
+  "main": "src/index.js",
+  "files": [
+    "src"
+  ],
+  "keywords": ["web-component", "custom-element", "Edirom Online"],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
