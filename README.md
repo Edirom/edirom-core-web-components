@@ -2,6 +2,7 @@
  
 [![DOI](https://zenodo.org/badge/1090859160.svg)](https://doi.org/10.5281/zenodo.17813169)
 [![GitHub release](https://img.shields.io/github/v/release/Edirom/edirom-core-web-components.svg)](https://github.com/Edirom/edirom-core-web-components/releases) 
+![NPM Version](https://img.shields.io/npm/v/edirom-core-web-components.svg)
 
 </div>
 
