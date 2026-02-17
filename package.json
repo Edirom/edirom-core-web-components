@@ -1,6 +1,6 @@
 {
   "name": "edirom-core-web-components",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "This package contains small web components for parts of the Edirom like icons, lists, menus etc. More complex web components are organized in individual repositories.",
   "homepage": "https://github.com/Edirom/edirom-core-web-components#readme",
   "bugs": {
