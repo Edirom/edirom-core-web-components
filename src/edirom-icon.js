@@ -64,7 +64,7 @@ class EdiromIcon extends HTMLElement {
     set color(v) { this.setAttribute('color', v); }
 
     get spin() { return this.hasAttribute('spin'); }
-    set spin(v) { if (v) this.setAttribute('spin', '') ; else this.removeAttribute('spin'); }
+    set spin(v) { if (v) this.setAttribute('spin', ''); else this.removeAttribute('spin'); }
 
     get rotate() { return this.getAttribute('rotate') || ''; }
     set rotate(v) { if (v === null) this.removeAttribute('rotate'); else this.setAttribute('rotate', String(v)); }
@@ -104,6 +104,7 @@ class EdiromIcon extends HTMLElement {
                 -webkit-font-smoothing: antialiased;
                 -moz-osx-font-smoothing: grayscale;
                 user-select: none;
+                -webkit-user-select: none;
                 transition: transform 0.2s linear;
                 color: var(--edirom-icon-color, inherit);
             }
