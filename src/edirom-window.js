@@ -280,28 +280,70 @@ class EdiromWindows extends HTMLElement {
                         this.windows[j][key] = windows[i][key];
                     }
 
-                    // TODO: update the window with the new values
-                    
-                    // remove the window from the DOM
-                    //this.remove(windows[i]["id"]);
-
-                    // add the window to the DOM
-                    //this.add([this.windows[j]]);
+                    // Apply the new values to the rendered WinBox window
+                    this._applyWindowUpdate(windows[i]);
                 }
             }
         }
             
     }
 
+    // Apply updated properties to an existing WinBox window in the shadow DOM
+    _applyWindowUpdate(changes) {
+        const el = this.shadowRoot.getElementById(changes.id);
+        if (!el) return;
+
+        const toCss = (v) => (typeof v === 'number' ? v + 'px' : v);
+
+        for (var key in changes) {
+            switch (key) {
+                case 'id':
+                    break;
+                case 'x':
+                    el.style.left = toCss(changes.x);
+                    break;
+                case 'y':
+                    el.style.top = toCss(changes.y);
+                    break;
+                case 'width':
+                    el.style.width = toCss(changes.width);
+                    break;
+                case 'height':
+                    el.style.height = toCss(changes.height);
+                    break;
+                case 'background':
+                    el.style.backgroundColor = changes.background;
+                    break;
+                case 'title': {
+                    const titleEl = el.querySelector('.wb-title');
+                    if (titleEl) titleEl.textContent = changes.title;
+                    break;
+                }
+                case 'html': {
+                    const body = el.querySelector('.wb-body');
+                    if (body) body.innerHTML = changes.html;
+                    break;
+                }
+                case 'url': {
+                    const iframe = el.querySelector('.wb-body iframe');
+                    if (iframe) iframe.src = changes.url;
+                    break;
+                }
+                default:
+                    break;
+            }
+        }
+    }
+
     arrange(type){
             // Get all managed winbox windows from the shadow root
             var topLevelDivs = this.windows.map((w) => { return this.shadowRoot.getElementById(w.id); }).filter(Boolean);
-            var screenWidth = screen.width;
-            var screenHeight = screen.height;
+            if (topLevelDivs.length === 0) return;
 
-
-            var contentWidth = screenWidth * 0.8
-            var contentHeight = screenHeight * 0.85
+            // Tile within the actual container, not the physical screen, and fill
+            // the full available area so no empty space is left over.
+            var contentWidth = this._container.clientWidth;
+            var contentHeight = this._container.clientHeight;
             var gridWidth = contentWidth / topLevelDivs.length
             var gridHeight = contentHeight / topLevelDivs.length
 
@@ -310,12 +352,12 @@ class EdiromWindows extends HTMLElement {
                     div.style.width = gridWidth+"px" ;
                     div.style.left = index * gridWidth + "px"
                     div.style.top = 0
-                    div.style.height = "95%"
+                    div.style.height = contentHeight + "px"
                 } if(type == "horizontal") {
                     div.style.height = gridHeight+"px"
                     div.style.top = index * gridHeight + "px"
                     div.style.left = 0
-                    div.style.width = "80%" ;
+                    div.style.width = contentWidth + "px" ;
                 }
 
             });   
@@ -333,4 +375,5 @@ if (!customElements.get('edirom-windows')) {
     customElements.define('edirom-windows', EdiromWindows);
 }
 
+export default EdiromWindows;
 export { EdiromWindows };

@@ -85,4 +85,10 @@ class EdiromDom extends HTMLElement {
     }
 }
 
-customElements.define('edirom-dom', EdiromDom);
+// Define the custom element if not already defined
+if (!customElements.get('edirom-dom')) {
+    customElements.define('edirom-dom', EdiromDom);
+}
+
+export default EdiromDom;
+export { EdiromDom };

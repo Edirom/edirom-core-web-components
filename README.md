@@ -271,32 +271,24 @@ element.shadowRoot // → null
 
 ## `<edirom-windows>`
 
-A Web Component that manages a set of draggable, resizable floating windows inside an isolated Shadow DOM, built on top of [WinBox.js](https://github.com/nextapps-de/winbox).
-
-It provides a declarative, attribute-driven API for adding, removing, updating and arranging windows, making it suitable for multi-document and multi-view interfaces in Edirom Online.
+A Web Component that manages a set of draggable, resizable floating windows inside an isolated Shadow DOM, built on top of [WinBox.js](https://github.com/nextapps-de/winbox). It offers a declarative, attribute-driven API for multi-document interfaces in Edirom Online.
 
 ### Features
 
-- Manages multiple floating windows via [WinBox.js](https://github.com/nextapps-de/winbox)
-- Fully isolated in an open Shadow DOM (`<host>` is a fixed, full-viewport layer)
-- Declarative control through HTML attributes (`set`, `add`, `remove`, `update`, `arrange`)
-- Automatic, asynchronous loading of the WinBox script and CSS from CDN
-- Queues windows requested before WinBox finishes loading and creates them once ready
-- Mirrors the document's stylesheets into the Shadow DOM so Edirom content styles (e.g. `.textViewContent`) apply inside windows
-- Built-in Edirom-matching appearance overrides for WinBox
-- Dispatches `communicate-windows-*` custom events on every attribute change
-- Vertical and horizontal tiling via the `arrange` attribute
-- Zero npm dependencies (WinBox is loaded at runtime)
+- Manages multiple floating windows via WinBox.js, isolated in an open Shadow DOM
+- Declarative control through attributes: `set`, `add`, `remove`, `update`, `arrange`
+- Loads WinBox script/CSS automatically at runtime (queues windows until ready)
+- Mirrors document stylesheets into the Shadow DOM so Edirom content styles apply
+- Dispatches a `communicate-windows-<attribute>` event on every change
+- Zero npm dependencies
 
 ### Usage
 
-Place the element anywhere in the document; it renders as a fixed overlay covering the viewport. Windows are controlled by setting attributes (typically as JSON strings).
+The element renders as a fixed, full-viewport overlay. Windows are controlled by setting attributes with JSON strings.
 
 ```html
 <edirom-windows></edirom-windows>
 ```
-
-Add a window programmatically:
 
 ```js
 const windows = document.querySelector('edirom-windows');
@@ -307,103 +299,20 @@ windows.setAttribute('add', JSON.stringify([
 
 ### Attributes
 
-All attributes accept a JSON string (except `remove` and `arrange`). Changing an attribute triggers the corresponding action and fires a `communicate-windows-<attribute>` event.
-
 | Attribute | Type | Description |
 | -- | -- | -- |
-| `set` | JSON array | Removes all currently managed windows and replaces them with the provided windows. An empty value clears all windows. |
-| `add` | JSON array | Adds one or more new windows without removing existing ones. |
+| `set` | JSON array | Replaces all managed windows (empty value clears them). |
+| `add` | JSON array | Adds windows without removing existing ones. |
 | `remove` | string (id) | Removes the window with the given `id`. |
-| `update` | JSON array | Updates properties of existing windows, matched by `id`. Each entry must include an `id`. |
-| `arrange` | `"vertical"` \| `"horizontal"` | Tiles all managed windows in the given orientation. |
+| `update` | JSON array | Updates existing windows, matched by `id`. |
+| `arrange` | `"vertical"` \| `"horizontal"` | Tiles all windows in the given orientation. |
 
 ### Window Configuration
 
-Each window object is passed through to WinBox. Commonly used properties:
-
-| Property | Type | Description |
-| -- | -- | -- |
-| `id` | string | Unique identifier used to reference the window in `remove`/`update`. |
-| `title` | string | Window title shown in the header. |
-| `html` / `url` | string | Window content (inline HTML or an embedded URL). |
-| `x`, `y` | number \| string | Initial position. |
-| `width`, `height` | number \| string | Initial size (e.g. `"95%"`). |
-| `border` | CSS size | Window border width (default `0.3em`). |
-| `background` | CSS color | Header background color (default `#ccc`). |
-| `index` | number | Stacking order / z-index (default `100000`). |
-
-If `border`, `background` or `index` are omitted, the component's defaults are applied automatically.
-
-### Examples
-
-Set (replace all windows):
-
-```js
-windows.setAttribute('set', JSON.stringify([
-    { id: 'a', title: 'Window A', html: '<p>First</p>' },
-    { id: 'b', title: 'Window B', html: '<p>Second</p>' }
-]));
-```
-
-Add a window:
-
-```js
-windows.setAttribute('add', JSON.stringify([
-    { id: 'c', title: 'Window C', html: '<p>Third</p>' }
-]));
-```
-
-Remove a window:
-
-```js
-windows.setAttribute('remove', 'c');
-```
-
-Update a window:
-
-```js
-windows.setAttribute('update', JSON.stringify([
-    { id: 'a', height: '95%' }
-]));
-```
-
-Arrange windows:
-
-```js
-windows.setAttribute('arrange', 'vertical');
-windows.setAttribute('arrange', 'horizontal');
-```
-
-### Events
-
-On every observed attribute change, the component dispatches a bubbling `CustomEvent`:
-
-```js
-windows.addEventListener('communicate-windows-add', (e) => {
-    console.log(e.detail.add); // the new attribute value
-});
-```
-
-Event names follow the pattern `communicate-windows-<attribute>`, where `<attribute>` is one of `set`, `add`, `remove`, `update`, `arrange`.
-
-### Asset Loading
-
-WinBox's script and CSS are loaded automatically at runtime from a CDN:
-
-- The WinBox script is appended to `document.head` (loaded once per document).
-- The WinBox CSS is injected into the Shadow DOM so it can style shadow nodes.
-- Edirom-matching style overrides are injected into the Shadow DOM.
-- All document `<link rel="stylesheet">` stylesheets are mirrored into the Shadow DOM so Edirom content styles apply inside windows.
-
-Windows requested before WinBox has finished loading are queued and created automatically once the script is ready.
+Each window object is passed to WinBox. Common properties: `id`, `title`, `html`/`url`, `x`, `y`, `width`, `height`, plus `border` (default `0.3em`), `background` (default `#ccc`) and `index` (default `100000`), which are applied automatically when omitted.
 
 ### Limitations
 
-1. `update` does not yet re-render windows
-
-The `update` action stores new values in the internal window state, but visually re-applying them to an existing WinBox window is not yet implemented.
-
-2. Requires network access
-
-WinBox assets are loaded from a CDN; without network access, windows cannot be created.
+- `update` stores new values but does not yet visually re-render existing windows.
+- WinBox assets are loaded from a CDN, so network access is required.
 

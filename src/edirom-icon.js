@@ -252,3 +252,6 @@ class EdiromIcon extends HTMLElement {
 if (!customElements.get('edirom-icon')) {
     customElements.define('edirom-icon', EdiromIcon);
 }
+
+export default EdiromIcon;
+export { EdiromIcon };
