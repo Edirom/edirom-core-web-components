@@ -297,6 +297,7 @@ class EdiromWindows extends HTMLElement {
     }
 }
 
-// Define the custom element
-customElements.define('edirom-windows', EdiromWindows);
-
+// Define the custom element if not already defined
+if (!customElements.get('edirom-windows')) {
+    customElements.define('edirom-windows', EdiromWindows);
+}
