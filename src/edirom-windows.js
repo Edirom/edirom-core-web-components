@@ -1,3 +1,18 @@
+/**
+ * edirom-windows.js
+ *
+ * Web Component: <edirom-windows>
+ * - Lightweight wrapper for managing multiple windows
+ * - Usage:
+ *     <edirom-windows></edirom-windows>
+ */
+
+// --- Path Resolution ---
+// Resolve the directory where this JS file lives, relative to the module source
+const winboxCssPath = new URL('../assets/css/winbox-0.2.82.min.css', import.meta.url).href;
+const winboxJsPath = new URL('../assets/js/winbox-0.2.82.min.js', import.meta.url).href;
+
+
 class EdiromWindows extends HTMLElement {
     constructor() {
         super();
@@ -144,8 +159,6 @@ class EdiromWindows extends HTMLElement {
     }
 
     _ensureWinboxAssets() {
-        const scriptSrc = "https://rawcdn.githack.com/daniel-jettka/winbox/0.2.82/dist/js/winbox.min.js";
-        const cssHref = "https://rawcdn.githack.com/daniel-jettka/winbox/0.2.82/dist/css/winbox.min.css";
         const ediromStyleId = "edirom-winbox-overrides";
 
         // Mirror all Edirom compiled stylesheets from the document into the shadow root
@@ -160,19 +173,34 @@ class EdiromWindows extends HTMLElement {
             }
         });
 
-        if (!document.querySelector(`script[src='${scriptSrc}']`)) {
-            const winboxScript = document.createElement('script');
-            winboxScript.src = scriptSrc;
-            winboxScript.onload = () => {
+        // Load WinBox CSS from local source if not already present in the document
+        if (document.querySelector('link[data-edirom-winbox-css]')) return;
+        const cssLink = document.createElement('link');
+        cssLink.rel = 'stylesheet';
+        cssLink.href = winboxCssPath; 
+        cssLink.setAttribute('data-edirom-winbox-css', '1');
+        document.head.appendChild(cssLink);
+
+
+        // Load WinBox JS from local source if not already present in the document
+        if (!document.querySelector('script[data-edirom-winbox-js]')){
+            
+            const jsScript = document.createElement('script');
+            jsScript.type = 'module';
+            jsScript.src = winboxJsPath;
+            jsScript.setAttribute('data-edirom-winbox-js', '1');
+            jsScript.onload = () => {
                 this.winboxLoaded = true;
                 this._createPendingWindows();
             };
-            winboxScript.onerror = () => {
-                console.error('Failed to load WinBox script:', scriptSrc);
+            jsScript.onerror = () => {
+                console.error('Failed to load WinBox script:', winboxJsPath);
             };
-            document.head.appendChild(winboxScript);
-        } else {
-            const existingScript = document.querySelector(`script[src='${scriptSrc}']`);
+            document.head.appendChild(jsScript);
+
+        } else{
+
+            const existingScript = document.querySelector(`script[data-edirom-winbox-js]`);
             if (typeof WinBox !== 'undefined') {
                 this.winboxLoaded = true;
                 this._createPendingWindows();
@@ -182,13 +210,16 @@ class EdiromWindows extends HTMLElement {
                     this._createPendingWindows();
                 });
             }
+
         }
+        
 
         // WinBox CSS must live inside the shadow root so it can style shadow-DOM nodes
-        if (!this.shadowRoot.querySelector(`link[href='${cssHref}']`)) {
+        if (!this.shadowRoot.querySelector(`link[data-edirom-winbox-css]`)) {
             const winboxCss = document.createElement('link');
             winboxCss.rel = 'stylesheet';
-            winboxCss.href = cssHref;
+            winboxCss.href = winboxCssPath;
+            winboxCss.setAttribute('data-edirom-winbox-css', '1');
             this.shadowRoot.appendChild(winboxCss);
         }
 
@@ -301,3 +332,5 @@ class EdiromWindows extends HTMLElement {
 if (!customElements.get('edirom-windows')) {
     customElements.define('edirom-windows', EdiromWindows);
 }
+
+export { EdiromWindows };
