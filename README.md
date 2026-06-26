@@ -265,3 +265,54 @@ If mode="closed" is used:
 
 element.shadowRoot // → null
 
+
+---
+
+
+## `<edirom-windows>`
+
+A Web Component that manages a set of draggable, resizable floating windows inside an isolated Shadow DOM, built on top of [WinBox.js](https://github.com/nextapps-de/winbox). It offers a declarative, attribute-driven API for multi-document interfaces in Edirom Online.
+
+### Features
+
+- Manages multiple floating windows via WinBox.js, isolated in an open Shadow DOM
+- Declarative control through attributes: `set`, `add`, `remove`, `update`, `arrange`
+- Loads WinBox script/CSS automatically at runtime (queues windows until ready)
+- Mirrors document stylesheets into the Shadow DOM so Edirom content styles apply
+- Dispatches a `communicate-windows-<attribute>` event on every change
+- Zero npm dependencies
+
+### Usage
+
+The element renders as a fixed, full-viewport overlay. Windows are controlled by setting attributes with JSON strings.
+
+```html
+<edirom-windows></edirom-windows>
+```
+
+```js
+const windows = document.querySelector('edirom-windows');
+windows.setAttribute('add', JSON.stringify([
+    { id: 'win1', title: 'Source A', html: '<p>Hello</p>' }
+]));
+```
+
+### Attributes
+
+| Attribute | Type | Description |
+| -- | -- | -- |
+| `set` | JSON array | Replaces all managed windows (empty value clears them). |
+| `add` | JSON array | Adds windows without removing existing ones. |
+| `remove` | string (id) | Removes the window with the given `id`. |
+| `update` | JSON array | Updates existing windows, matched by `id`. |
+| `arrange` | `"vertical"` \| `"horizontal"` | Tiles all windows in the given orientation. |
+
+### Window Configuration
+
+Each window object is passed to WinBox. Common properties: `id`, `title`, `html`/`url`, `x`, `y`, `width`, `height`, plus `border` (default `0.3em`), `background` (default `#ccc`) and `index` (default `100000`), which are applied automatically when omitted.
+
+### Limitations
+
+- `update` stores new values but does not yet visually re-render existing windows.
+- WinBox assets are loaded from a CDN, so network access is required.
+
