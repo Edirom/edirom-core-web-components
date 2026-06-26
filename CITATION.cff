@@ -8,6 +8,12 @@ authors:
   - given-names: Daniel
     family-names: Jettka
     orcid: https://orcid.org/0000-0002-2375-2227
+  - given-names: Dennis
+    family-names: Friedl
+    orcid: https://orcid.org/0009-0000-4410-4627
+  - given-names: Hizkiel
+    family-names: Alemayehu
+    orcid: https://orcid.org/0009-0006-3345-086X
 identifiers:
   - type: doi
     value: 10.5281/zenodo.17813169
@@ -19,5 +25,5 @@ abstract: >-
   icons, lists, menus etc. More complex web components are organized 
   in individual repositories.
 license: GPL-3.0
-version: v0.1.0
-date-released: '2025-12-01'
+version: v0.2.1
+date-released: '2026-02-17'
