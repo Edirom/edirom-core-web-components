@@ -14,7 +14,24 @@
  *  GNU General Public License for more details.
  *
  *  You should have received a copy of the GNU General Public License
- *  along with Edirom Online.  If not, see <http://www.gnu.org/licenses/>.
+ *  along with Edirom Online. If not, see <http://www.gnu.org/licenses/>.
+ * 
+ * -----------------------------------------------------------------------
+ * 
+ *  About
+ *  edirom-dom.js
+ *
+ *  Web Component: <edirom-dom>
+ * 
+ *  - A simple wrapper for a shadow DOM, allowing to set the shadow root mode and delegatesFocus option via attributes.
+ *  - Usage:
+ *     <edirom-dom mode="open" delegates-focus>
+ *         <p>Content inside the shadow DOM</p>
+ *     </edirom-dom>
+ *   - Attributes:
+ *    - mode: "open" (default) or "closed"
+ *    - delegates-focus: boolean attribute, if present, enables delegatesFocus
+ *    - slot-assignment: "named" or "manual" (optional), sets the slot assignment mode
  */
 
 class EdiromDom extends HTMLElement {
