@@ -13,6 +13,10 @@
  * - You can also place custom SVG/HTML inside the element (slot) to override the font icon.
  */
 
+// --- Path Resolution ---
+// Resolve the directory where this JS file lives, relative to the module source
+const cssPath = new URL('../assets/css/material-symbols-outlined.css', import.meta.url).href;
+
 class EdiromIcon extends HTMLElement {
     static get observedAttributes() {
         return ['name', 'size', 'color', 'spin', 'rotate', 'aria-label', 'role', 'button', 'pressed'];
@@ -203,10 +207,10 @@ class EdiromIcon extends HTMLElement {
     // inject Material Icon font
     static _loadMaterialIconFonts() {
         if (document.querySelector('link[data-edirom-material-icons]')) return;
-        const href = 'https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined&display=swap';
+
         const link = document.createElement('link');
         link.rel = 'stylesheet';
-        link.href = href;
+        link.href = cssPath; // Uses the module-relative URL computed at the top
         link.setAttribute('data-edirom-material-icons', '1');
         document.head.appendChild(link);
     }
@@ -252,3 +256,5 @@ class EdiromIcon extends HTMLElement {
 if (!customElements.get('edirom-icon')) {
     customElements.define('edirom-icon', EdiromIcon);
 }
+
+export { EdiromIcon };
