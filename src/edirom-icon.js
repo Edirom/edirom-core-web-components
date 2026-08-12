@@ -68,7 +68,7 @@ class EdiromIcon extends HTMLElement {
     set color(v) { this.setAttribute('color', v); }
 
     get spin() { return this.hasAttribute('spin'); }
-    set spin(v) { if (v) this.setAttribute('spin', '') ; else this.removeAttribute('spin'); }
+    set spin(v) { if (v) this.setAttribute('spin', ''); else this.removeAttribute('spin'); }
 
     get rotate() { return this.getAttribute('rotate') || ''; }
     set rotate(v) { if (v === null) this.removeAttribute('rotate'); else this.setAttribute('rotate', String(v)); }
@@ -84,17 +84,20 @@ class EdiromIcon extends HTMLElement {
         const spin = this.hasAttribute('spin');
         const rotate = this.getAttribute('rotate');
 
+        const isFill = sizeAttr === 'fill';
+
         // Build the internal DOM only once
         this._shadow.innerHTML = ''; // clear
         const style = document.createElement('style');
         style.textContent = `
-            :host { display: inline-block; vertical-align: middle; line-height: 0; }
+            :host { display: ${isFill ? 'block' : 'inline-block'}; ${isFill ? 'width: 100%; height: 100%; container-type: size;' : 'vertical-align: middle;'} line-height: 0; }
             .icon {
-                display: inline-block;
+                display: ${isFill ? 'flex' : 'inline-block'};
+                ${isFill ? 'width: 100%; height: 100%; align-items: center; justify-content: center;' : ''}
                 font-family: 'Material Symbols Outlined';
                 font-weight: normal;
                 font-style: normal;
-                font-size: var(--edirom-icon-size, 24px);
+                font-size: ${isFill ? 'min(100cqi, 100cqb)' : 'var(--edirom-icon-size, 24px)'};
                 line-height: 1;
                 letter-spacing: normal;
                 text-transform: none;
@@ -105,6 +108,7 @@ class EdiromIcon extends HTMLElement {
                 -webkit-font-smoothing: antialiased;
                 -moz-osx-font-smoothing: grayscale;
                 user-select: none;
+                -webkit-user-select: none;
                 transition: transform 0.2s linear;
                 color: var(--edirom-icon-color, inherit);
             }
@@ -143,8 +147,8 @@ class EdiromIcon extends HTMLElement {
         // apply color
         if (color) wrapper.style.setProperty('--edirom-icon-color', color);
 
-        // apply size (support number and units)
-        if (sizeAttr) {
+        // apply size (support number and units, but not 'fill' which is handled via CSS)
+        if (sizeAttr && !isFill) {
             const sizeValue = EdiromIcon._normalizeSize(sizeAttr);
             wrapper.style.setProperty('--edirom-icon-size', sizeValue);
         }

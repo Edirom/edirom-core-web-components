@@ -57,6 +57,22 @@ It provides:
 ```
 
 
+### Fill Mode
+
+Set `size="fill"` to make the icon expand to fill its container:
+
+```html
+<div style="width: 64px; height: 64px;">
+    <edirom-icon name="home" size="fill"></edirom-icon>
+</div>
+```
+
+In fill mode:
+- The host switches to `display: block` with `width: 100%; height: 100%`
+- The icon is centered (flexbox) and scaled to fit via `min(100cqi, 100cqb)` using CSS container queries
+- Useful for icon buttons or containers where the icon should occupy the full available space
+
+
 ### Spin and Rotate
 
 ```html
@@ -106,30 +122,31 @@ If the element contains children, the component renders a `<slot>` instead of a 
 
 ## Attributes
 
-| Attribute     | Type                          | Description |
-|---------------|------------------------------|-------------|
-| `name`        | string                        | Icon name (ligature text) |
-| `size`        | number \| CSS size \| `12px`    | Icon size |
-| `color`       | CSS color                     | Icon color |
-| `spin`        | boolean                       | Enables infinite rotation |
-| `rotate`      | number \| `45deg`             | Rotates icon |
-| `aria-label`  | string                        | Accessibility label |
-| `role`        | string                        | ARIA role |
-| `button`      | boolean                       | Enables button styling + keyboard |
-| `pressed`     | boolean                       | Applies pressed styling |
+| Attribute     | Type                                      | Description |
+|---------------|------------------------------------------|-------------|
+| `name`        | string                                    | Icon name (ligature text) |
+| `size`        | number \| CSS size \| `12px` \| `"fill"` | Icon size; use `"fill"` to expand to fit container |
+| `color`       | CSS color                                 | Icon color |
+| `spin`        | boolean                                   | Enables infinite rotation |
+| `rotate`      | number \| `45deg`                         | Rotates icon |
+| `aria-label`  | string                                    | Accessibility label |
+| `role`        | string                                    | ARIA role |
+| `button`      | boolean                                   | Enables button styling + keyboard |
+| `pressed`     | boolean                                   | Applies pressed styling |
 
 
 ## Size Attribute Formats
 
 The `size` attribute supports:
 
-| Value   | Result |
-|---------|--------|
-| `"24"`  | `24px` |
-| `"32px"`| `32px` |
-| `"2em"` | `2em`  |
-| `"150%"`| `150%` |
-| `"2x"`  | `2em`  |
+| Value    | Result |
+|----------|--------|
+| `"24"`   | `24px` |
+| `"32px"` | `32px` |
+| `"2em"`  | `2em`  |
+| `"150%"` | `150%` |
+| `"2x"`   | `2em`  |
+| `"fill"` | Fills the parent container (sets `display: block`, `width/height: 100%`, uses CSS container queries to scale) |
 
 
 ## Styling
