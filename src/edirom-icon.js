@@ -90,7 +90,13 @@ class EdiromIcon extends HTMLElement {
         this._shadow.innerHTML = ''; // clear
         const style = document.createElement('style');
         style.textContent = `
-            :host { display: ${isFill ? 'block' : 'inline-block'}; ${isFill ? 'width: 100%; height: 100%; container-type: size;' : 'vertical-align: middle;'} line-height: 0; }
+            :host {
+                display: ${isFill ? 'block' : 'inline-block'};
+                ${isFill ? 'width: 100%; height: 100%; container-type: size;' : 'vertical-align: middle;'}
+                line-height: 0;
+                /* button hover / pressed backgrounds are derived from this */
+                --_ei-secondary: var(--secondary-color, #cacaca);
+            }
             .icon {
                 display: ${isFill ? 'flex' : 'inline-block'};
                 ${isFill ? 'width: 100%; height: 100%; align-items: center; justify-content: center;' : ''}
@@ -118,12 +124,12 @@ class EdiromIcon extends HTMLElement {
             }
 
             .button.pressed {
-                background-color:rgb(167, 167, 167) !important;
+                background-color: color-mix(in oklch, var(--_ei-secondary) 88%, black) !important;
                 box-shadow: 0 1px 1px rgba(8, 8, 8, 0.5) inset;
             }
-            
+
             .button:hover {
-                background-color:rgb(197, 197, 197) !important;
+                background-color: color-mix(in oklch, var(--_ei-secondary) 97%, black) !important;
                 box-shadow: 0 1px 1px rgba(8, 8, 8, 0.45) inset;
             }
 
