@@ -151,19 +151,20 @@ The `size` attribute supports:
 
 ## Styling
 
-The component uses CSS variables internally:
+The component is themed via CSS custom properties. Override them on the element
+or any ancestor:
 
-```css
---edirom-icon-size
---edirom-icon-color
-```
-
-You can override them externally:
+| Custom property | Default | Description |
+|---|---|---|
+| `--edirom-icon-size` | `24px` | Icon size (also settable via the `size` attribute) |
+| `--edirom-icon-color` | `inherit` | Icon glyph color (also settable via the `color` attribute) |
+| `--secondary-color` | `#cacaca` | Base for the `button` hover / pressed backgrounds — hover is `color-mix(… 90%, black)`, pressed `color-mix(… 78%, black)` of this |
 
 ```css
 edirom-icon {
     --edirom-icon-size: 40px;
     --edirom-icon-color: red;
+    --secondary-color: green;
 }
 ```
 
